@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 export default function ItemContainer({children, style}) {
   return (
-      <View style={[styles.itemContainer, style]}>
+      <View style={style ? style : styles.itemContainer}>
         {children}
       </View>
   );
