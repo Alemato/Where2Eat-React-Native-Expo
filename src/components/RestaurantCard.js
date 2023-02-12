@@ -1,6 +1,5 @@
-import React from "react";
-import {Alert, Button, Image, StyleSheet, Text, View} from "react-native";
-
+import React from 'react';
+import {Alert, Button, Image, StyleSheet, Text, View} from 'react-native';
 
 class RestaurantCard extends React.Component {
 
@@ -14,7 +13,7 @@ class RestaurantCard extends React.Component {
             <View style={styles.cardContainer}>
                 <View style={styles.card}>
                     <Image style={styles.image}
-                           source={require('../images/2019-07-Lollo-Caffè.jpg')}
+                           source={{uri: 'https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}}
                     />
                     <View style={styles.texts}>
                         <Text style={styles.ragioneSociale}>
