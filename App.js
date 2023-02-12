@@ -1,20 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import RestaurantCard from "./src/components/RestaurantCard";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    const ristoranti = [
+        {
+            id: '1',
+            ragioneSociale: 'Villa Crespi 1',
+            descrizione: 'ababablue blue'
+        },
+        {
+            id: '2',
+            ragioneSociale: 'Villa Crespi 2',
+            descrizione: 'ababablue blue'
+        },
+        {
+            id: '3',
+            ragioneSociale: 'Villa Crespi 3',
+            descrizione: 'ababablue blue'
+        },
+        {
+            id: '4',
+            ragioneSociale: 'Villa Crespi 4',
+            descrizione: 'ababablue blue'
+        },
+    ];
+
+    return (
+        <View style={styles.container}>
+            <FlatList style={styles.list}
+                      data={ristoranti}
+                      renderItem={({item}) => <RestaurantCard restaurantCard={{
+                          ragioneSociale: item.ragioneSociale,
+                          descrizione: item.descrizione,
+                      }}/>}
+                      keyExtractor={(item) => item.id}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        margin: 10,
+        alignItems: 'center',
+    },
+    list: {
+        width: "100%",
+    }
 });
