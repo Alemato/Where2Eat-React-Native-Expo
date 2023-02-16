@@ -39,11 +39,11 @@ export default function RestaurantPageScreen() {
       },
       {
         id: 2,
-        nome: '',
+        nome: 'Wi-Fi',
       },
       {
         id: 3,
-        nome: '',
+        nome: 'Wi-Fi',
       },
       {
         id: 4,
