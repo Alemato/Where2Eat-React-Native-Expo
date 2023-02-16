@@ -7,14 +7,15 @@ import {Provider} from 'react-redux';
 import {store, persistor} from './src/stores';
 import {PersistGate} from 'redux-persist/integration/react';
 */
-import HomePageScreen from './src/pages/HomePageScreen';
+import RestaurantPageScreen from './src/pages/RestaurantPageScreen';
 
 export default function App() {
   return (
       <>
-      {/*<Provider store={store}>
+        {/*<Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>*/}
-          <HomePageScreen />
+        {/*<HomePageScreen />*/}
+        <RestaurantPageScreen/>
         {/*</PersistGate>
       </Provider>*/}
       </>
