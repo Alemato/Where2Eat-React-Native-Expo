@@ -6,6 +6,7 @@ export default function CardTitle({title, style}) {
 
 const styles = StyleSheet.create({
   title: {
+    paddingTop: 2,
     paddingHorizontal: 10,
     marginTop: 20,
     fontSize: 28,

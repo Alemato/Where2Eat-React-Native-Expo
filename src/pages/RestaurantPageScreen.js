@@ -1,4 +1,5 @@
-import {Button, FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ItemContainer from '../components/ItemContainer';
 import CardImage from '../components/CardImage';
 import {
@@ -8,8 +9,9 @@ import {
   Title,
 } from '../components/typo';
 import CardRestaurantDetails from '../components/CardRestaurantDetails';
-import React from 'react';
 import RowContainer from '../components/RowContainer';
+import MyButton from '../components/MyButton';
+import BookingModal from '../components/BookingModal';
 
 export default function RestaurantPageScreen() {
 
@@ -102,6 +104,10 @@ export default function RestaurantPageScreen() {
       },
     ],
   };
+  const [modalVisible, setModalVisible] = useState(false);
+  const toggleModalVisible = (modalVisible) => {
+    setModalVisible(modalVisible);
+  };
 
   function separator() {
     return <ItemHorizontalListSeparator/>;
@@ -117,15 +123,23 @@ export default function RestaurantPageScreen() {
         'nessun');
   }
 
-  function serviceList() {
-    return (
-        <FlatList
-            ListEmptyComponent={<View/>}
-            data={ristorante.servizi}
-            renderItem={({item}) =>
-                <CardRowText text={' \u2022    ' + item.nome}></CardRowText>
-            }/>
-    );
+  function dueColonne() {
+    const serv = ristorante.servizi;
+    if (serv.length > 0) {
+      if (serv.length >= 2) {
+        let result = [];
+        const offset = Math.floor(serv.length / 2);
+        const arry1 = serv.slice(0, offset);
+        const arry2 = serv.slice(offset, offset + offset);
+        result.push(arry1);
+        result.push(arry2);
+        return result;
+      } else {
+        let result = [];
+        result.push(serv);
+        return result;
+      }
+    }
   }
 
   return (
@@ -200,25 +214,32 @@ export default function RestaurantPageScreen() {
             </RowContainer>
           </CardRestaurantDetails>
           <CardRestaurantDetails>
-            <CardTitle title="Servizi opperti"></CardTitle>
-            <RowContainer>
-              <FlatList horizontal={true}
-                        ListEmptyComponent={<View/>}
-                        ItemSeparatorComponent={separator}
-                        data={ristorante.servizi}
-                        renderItem={({item}) =>
-                            <CardRowText
-                                text={item.nome}></CardRowText>
-                        }/>
-
-            </RowContainer>
+            <CardTitle title="Servizi offerti"></CardTitle>
+            <View style={styles.serviziR}>
+              <View
+                  style={styles.serviziC}>
+                {dueColonne()[0].map((item, index) => {
+                  return <Text key={index}>{item.nome}</Text>;
+                })}
+              </View>
+              {dueColonne().length === 2 &&
+                  <View style={styles.serviziC}>
+                    {dueColonne()[1].map((item, index) => {
+                      return <Text key={index}>{' \u2022    ' +
+                          item.nome}</Text>;
+                    })}
+                  </View>}
+            </View>
           </CardRestaurantDetails>
-          <Button title="Prenota sl ristorante"
-                  onPress={() => {
-                    navigation.navigate('RestaurantPageScreen');
-                  }}
-          />
         </ScrollView>
+        <View style={styles.buttonContent}>
+          <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
+                    setModalVisible={toggleModalVisible}
+                    modalVisible={modalVisible}
+                    pressedColor={'#00539C'} styleButton={styles.button}/>
+        </View>
+        <BookingModal setModalVisible={toggleModalVisible}
+                      modalVisible={modalVisible}/>
       </ItemContainer>
 
   );
@@ -229,8 +250,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 15,
     marginTop: 30,
-    paddingBottom: 15,
     alignItems: 'center',
+    MarginBottom: 50,
   },
   image: {
     width: '100%',
@@ -238,10 +259,24 @@ const styles = StyleSheet.create({
   },
   scroll: {
     width: '100%',
+    height: '91%',
   },
   buttonContent: {
-    flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10,
+    position: 'absolute',
+    bottom: 5,
   },
+  button: {
+    flex: 1,
+    borderRadius: 5,
+    alignItems: 'center',
+    paddingHorizontal: 75,
+  },
+  textButton: {
+    color: 'white',
+    padding: 10,
+    fontWeight: '800',
+  },
+  serviziC: {flexDirection: 'column', paddingLeft: 10},
+  serviziR: {flexDirection: 'row'},
 });

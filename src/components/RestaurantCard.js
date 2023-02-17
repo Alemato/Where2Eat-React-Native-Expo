@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import ItemContainer from './ItemContainer';
 import Card from './Card';
 import {CardRowText, CardTitle, ItemHorizontalListSeparator} from './typo';
@@ -7,6 +7,7 @@ import RowContainer from './RowContainer';
 import CardImage from './CardImage';
 import CardTextsContainer from './CardTextsContainer';
 import Badge from './Bedge';
+import MyButton from './MyButton';
 
 export default function RestaurantCard({restaurantCard}) {
 
@@ -67,11 +68,8 @@ export default function RestaurantCard({restaurantCard}) {
                 text={restaurantCard.ristorante.descrizioneBreve}></CardRowText>
 
             <View style={styles.buttonContent}>
-              <Button title="Dettagli ristorante"
-                      onPress={() => {
-                        navigation.navigate('RestaurantPageScreen');
-                      }}
-              />
+              <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
+                        pressedColor={'#00539C'} styleButton={styles.button}/>
             </View>
           </CardTextsContainer>
         </Card>

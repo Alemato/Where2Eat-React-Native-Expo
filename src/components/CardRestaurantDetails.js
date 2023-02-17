@@ -9,7 +9,7 @@ export default function CardRestaurantDetails({children}) {
 const styles = StyleSheet.create({
   card: {
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 30,
     padding: 20,
     marginHorizontal: 10,
     shadowColor: 'black',
