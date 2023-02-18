@@ -1,7 +1,7 @@
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
-export default function Page({children, style}) {
-  let loading = false;
+export default function LoadingContent({children, style}) {
+  const loading = false;
   return (
       <View style={[
         styles.container,
@@ -18,7 +18,6 @@ export default function Page({children, style}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
   },
   loading: {
     backgroundColor: 'rgba(0,0,0,0.6)',

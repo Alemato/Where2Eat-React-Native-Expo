@@ -2,7 +2,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import RestaurantCard from '../components/RestaurantCard';
 import {useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import Page from '../components/Page';
+import ItemContainer from '../components/ItemContainer';
 
 export default function HomePageScreen() {
   const ristoranti = [
@@ -353,7 +353,7 @@ export default function HomePageScreen() {
     console.log('useFocusEffect Callback Home Page');
   }, []));
   return (
-      <Page>
+      <ItemContainer style={styles.container}>
         <FlatList style={styles.list}
                   data={ristoranti}
                   renderItem={({item}) => <RestaurantCard restaurantCard={{
@@ -361,11 +361,16 @@ export default function HomePageScreen() {
                   }}/>}
                   keyExtractor={(item) => item.id}
         />
-      </Page>
+      </ItemContainer>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 10,
+    alignItems: 'center',
+  },
   list: {
     width: '100%',
   },

@@ -1,13 +1,17 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomePageScreen from '../pages/HomePageScreen';
+import LoginPageScreen from '../pages/LoginPageScreen';
+import RegistrazionePageScreen from '../pages/RegistrazionePageScreen';
 
 const RootStack = createNativeStackNavigator();
 
 export default function RootNavigator() {
   return (
       <RootStack.Navigator>
-        <RootStack.Screen name={'Login'} component={HomePageScreen}/>
-        <RootStack.Screen name={'Registrazione'} component={HomePageScreen}/>
+        <RootStack.Screen name={'Login'} component={LoginPageScreen}
+                          options={{headerTitleAlign: 'center'}}/>
+        <RootStack.Screen name={'Registrazione'}
+                          component={RegistrazionePageScreen}
+                          options={{headerTitleAlign: 'center'}}/>
       </RootStack.Navigator>
   );
 }
