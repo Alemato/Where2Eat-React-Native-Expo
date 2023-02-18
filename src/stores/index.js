@@ -1,8 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import AppReducer from '../reducers/AppReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import promise from 'redux-promise-middleware';
-
 import {
   FLUSH,
   PAUSE,
@@ -14,13 +12,18 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
+import AppReducer from '../reducers/AppReducer';
+import LoginRegistrazioneReducer from '../reducers/LoginRegistrazioneReducer';
+
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['loginRegistrati'],
 };
 
 const reducers = combineReducers({
   app: AppReducer,
+  loginRegistrati: LoginRegistrazioneReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

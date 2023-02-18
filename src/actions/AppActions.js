@@ -1,9 +1,5 @@
 import {sAppLoginFormEmail, sAppLoginFormPassword} from '../selectors';
-import {
-  loginFailure,
-  loginSuccess,
-  resetLoginForm,
-} from '../reducers/AppReducer';
+import {loginSuccess} from '../reducers/AppReducer';
 
 export function appSignIn() {
   return function(dispatch, getState) {
@@ -14,10 +10,8 @@ export function appSignIn() {
 
     if (email === 'mario') {
       dispatch(loginSuccess());
-      dispatch(resetLoginForm());
     } else {
-      dispatch(loginFailure());
-      dispatch(resetLoginForm());
+
     }
 
   };
