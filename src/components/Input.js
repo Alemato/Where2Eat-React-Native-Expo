@@ -7,10 +7,12 @@ export default function Input({
                                 placeholder,
                                 keyboardType,
                                 style,
+                                rest,
                               }) {
 
   return (
       <TextInput
+          {...rest}
           style={style ? style : styles.input}
           onChangeText={onChangeData}
           value={data}

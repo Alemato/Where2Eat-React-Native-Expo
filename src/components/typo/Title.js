@@ -1,6 +1,6 @@
 import {StyleSheet, Text} from 'react-native';
 
-export default function CardTitle({title, style}) {
+export default function Title({title, style}) {
   return <Text style={style ? style : styles.title}>{title}</Text>;
 }
 

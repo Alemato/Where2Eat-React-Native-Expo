@@ -11,7 +11,7 @@ export default function ItemContainer({children, style}) {
 const styles = StyleSheet.create({
   itemContainer: {
     paddingHorizontal: 12,
-    marginBottom: 24,
+    marginBottom: 12,
   },
 });
 
