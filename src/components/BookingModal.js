@@ -3,15 +3,15 @@ import {Modal, StyleSheet, View} from 'react-native';
 import MyButton from './MyButton';
 import {CardTitle} from './typo';
 import CardTextsContainer from './CardTextsContainer';
-import InputComponent from './InputComponent';
+import Input from './Input';
 
 export default function BookingModal({setModalVisible, modalVisible}) {
 
   const initialState = '';
 
-  const [data, onChangeData] = React.useState(initialState);
-  const [ora, onChangeOra] = React.useState(initialState);
-  const [posti, onChangePosti] = React.useState(initialState);
+  const [date, onChangeData] = React.useState(initialState);
+  const [time, onChangeOra] = React.useState(initialState);
+  const [seat, onChangePosti] = React.useState(initialState);
 
   return (
       <View style={styles.centeredView}>
@@ -27,26 +27,27 @@ export default function BookingModal({setModalVisible, modalVisible}) {
             <View style={styles.modalView}>
               <CardTitle title={'Prenota un tavolo'}></CardTitle>
               <CardTextsContainer>
-                <InputComponent data={data} onChangeData={onChangeData}
-                                placeholder={'Scegli la data'}
-                                keyboardType={'date'}/>
-                <InputComponent data={ora} onChangeData={onChangeOra}
-                                placeholder={'Scegli l\'ora'}
-                                keyboardType={'text'}/>
-                <InputComponent data={posti} onChangeData={onChangePosti}
-                                placeholder={'Numero posti'}
-                                keyboardType={'numeric'}/>
+                <Input data={date} onChangeData={onChangeData}
+                       placeholder={'Scegli la data'}
+                       keyboardType={'date'}/>
+                <Input data={time} onChangeData={onChangeOra}
+                       placeholder={'Scegli l\'ora'}
+                       keyboardType={'text'}/>
+                <Input data={seat} onChangeData={onChangePosti}
+                       placeholder={'Numero posti'}
+                       keyboardType={'numeric'}/>
 
-                <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
+                <MyButton text={'PRENOTA AL RISTORNATE'}
+                          color={'#0089FF'}
+                          pressedColor={'#00539C'}
+                          styleButton={styles.button}
                           onPress={() => {
                             setModalVisible(!modalVisible);
 
                           }}
-                          pressedColor={'#00539C'}
-                          styleButton={styles.button}
                           disabled={
-                            !(data !== '' && data !== ' ' && ora !== '' &&
-                                ora !== ' ' && posti !== '' && posti !== ' ')
+                            !(date !== '' && date !== ' ' && time !== '' &&
+                                time !== ' ' && seat !== '' && seat !== ' ')
                           }/>
               </CardTextsContainer>
             </View>

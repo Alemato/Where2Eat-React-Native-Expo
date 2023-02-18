@@ -1,35 +1,30 @@
-import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
+import React from 'react';
 
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Input({
+                                data,
+                                onChangeData,
+                                placeholder,
+                                keyboardType,
+                                style,
+                              }) {
 
-  render() {
-    const {value, placeholder, handleChangeText, style} = this.props;
-    return (
-        <TextInput {...this.props} style={[styles.input, style]}
-                   value={value}
-                   onChangeText={handleChangeText}
-                   placeholder={placeholder}
-                   placeholderTextColor={styles.placeholderColor}/>
-    );
-  }
-}
-
-export default Input;
+  return (
+      <TextInput
+          style={style ? style : styles.input}
+          onChangeText={onChangeData}
+          value={data}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+      />
+  );
+};
 
 const styles = StyleSheet.create({
   input: {
+    height: 40,
+    margin: 12,
     borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    borderBottomColor: '#000000',
-    fontSize: 18,
-    height: 35,
-    paddingHorizontal: 5,
-    color: 'black',
+    padding: 10,
   },
-  placeholderColor: 'rgb(201,201,201)',
 });
