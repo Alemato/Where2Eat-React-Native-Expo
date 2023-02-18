@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ItemContainer from '../components/ItemContainer';
 import CardImage from '../components/CardImage';
@@ -13,7 +13,17 @@ import RowContainer from '../components/RowContainer';
 import MyButton from '../components/MyButton';
 import BookingModal from '../components/BookingModal';
 
-export default function RestaurantPageScreen() {
+export default function RestaurantPageScreen({route, navigation}) {
+  const {id} = route.params;
+
+  useEffect(() => {
+    console.log('lo faccio');
+    const rootNavigator = navigation;
+    if (id === 1) {
+      rootNavigator.setOptions({headerTitle: ristorante.ragioneSociale});
+    } else
+      rootNavigator.setOptions({headerTitle: `Ristorante ${id}`});
+  }, [navigation, route]);
 
   const ristorante = {
     id: 1,
@@ -249,9 +259,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 15,
-    marginTop: 30,
     alignItems: 'center',
-    MarginBottom: 50,
   },
   image: {
     width: '100%',
@@ -259,7 +267,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     width: '100%',
-    height: '91%',
+    height: '84%',
   },
   buttonContent: {
     justifyContent: 'center',

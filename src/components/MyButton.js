@@ -1,5 +1,6 @@
 import {Alert, Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 export default function MyButton({
                                    text,
@@ -10,23 +11,39 @@ export default function MyButton({
                                    setModalVisible,
                                    modalVisible,
                                    disabled = false,
+                                   pressHandler = () => {
+                                   },
                                  }) {
+  const navigation = useNavigation();
+
   function dismissModal() {
+    // dispatch redux crea prenotazione e vedi cosa fare
     setModalVisible(!modalVisible);
+    //modalVisible = true;
     if (modalVisible) {
-      Alert.alert('Prenotazione eseguita', 'Ci vediamo al ristorante');
+      // spostare nel action crea prenotazione
+      Alert.alert('Prenotazione eseguita', 'Ci vediamo al ristorante', [
+        {
+          text: 'OK', onPress: () => {
+            console.log('OK Pressed vai alle prenotazioni');
+            navigation.navigate('Prenotazioni');
+          },
+        },
+      ]);
     }
   }
 
   return (
       <Pressable
           disabled={disabled}
-          onPress={() => setModalVisible ? dismissModal() : null}
+          onPress={() => {
+            setModalVisible ? dismissModal() : pressHandler();
+          }}
           style={({pressed}) => [
             {
               backgroundColor: pressed ? pressedColor : color,
             },
-            disabled ? styles.disabled : '',
+            disabled ? styles.disabled : null,
             styleButton,
           ]}>
         <Text style={styleText ? styleText : styles.textButton}>{text}</Text>
@@ -43,5 +60,4 @@ const styles = StyleSheet.create({
   disabled: {
     backgroundColor: '#9e9e9e',
   },
-
 });

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 
 function InputLabel({text}) {
   return <Text style={styles.text}>{text}</Text>;

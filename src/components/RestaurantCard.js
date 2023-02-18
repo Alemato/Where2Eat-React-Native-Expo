@@ -8,8 +8,10 @@ import CardImage from './CardImage';
 import CardTextsContainer from './CardTextsContainer';
 import Badge from './Bedge';
 import MyButton from './MyButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function RestaurantCard({restaurantCard}) {
+  const navigation = useNavigation();
 
   function separator() {
     return <ItemHorizontalListSeparator/>;
@@ -69,7 +71,11 @@ export default function RestaurantCard({restaurantCard}) {
 
             <View style={styles.buttonContent}>
               <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
-                        pressedColor={'#00539C'} styleButton={styles.button}/>
+                        pressedColor={'#00539C'} styleButton={styles.button}
+                        pressHandler={() => {
+                          navigation.navigate('RestaurantPage',
+                              {id: restaurantCard.ristorante.id});
+                        }}/>
             </View>
           </CardTextsContainer>
         </Card>

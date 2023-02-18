@@ -1,6 +1,8 @@
-import {FlatList, StatusBar, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import RestaurantCard from '../components/RestaurantCard';
-import ItemContainer from '../components/ItemContainer';
+import {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import Page from '../components/Page';
 
 export default function HomePageScreen() {
   const ristoranti = [
@@ -347,8 +349,11 @@ export default function HomePageScreen() {
 
   ];
 
+  useFocusEffect(useCallback(function() {
+    console.log('useFocusEffect Callback Home Page');
+  }, []));
   return (
-      <ItemContainer style={styles.container}>
+      <Page>
         <FlatList style={styles.list}
                   data={ristoranti}
                   renderItem={({item}) => <RestaurantCard restaurantCard={{
@@ -356,17 +361,11 @@ export default function HomePageScreen() {
                   }}/>}
                   keyExtractor={(item) => item.id}
         />
-        <StatusBar style="auto"/>
-      </ItemContainer>
+      </Page>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 10,
-    alignItems: 'center',
-  },
   list: {
     width: '100%',
   },

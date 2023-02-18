@@ -10,7 +10,6 @@ export default function BookingModal({setModalVisible, modalVisible}) {
   const [data, onChangeData] = React.useState('');
   const [ora, onChangeOra] = React.useState('');
   const [posti, onChangePosti] = React.useState('');
-
   return (
       <View style={styles.centeredView}>
         <Modal
