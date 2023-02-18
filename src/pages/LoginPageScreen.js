@@ -1,10 +1,13 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ItemContainer from '../components/ItemContainer';
 import Card from '../components/Card';
 import {InputLabel, Title} from '../components/typo';
 import Input from '../components/Input';
+import MyButton from '../components/MyButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function LoginPageScreen() {
+  const navigation = useNavigation();
   return (
       <View style={styles.pageContainer}>
         <View style={styles.cardContainer}>
@@ -15,8 +18,35 @@ export default function LoginPageScreen() {
             <ItemContainer style={styles.labelContainer}>
               <InputLabel text={'Email'}/>
             </ItemContainer>
+            <ItemContainer style={styles.inputContainer}>
+              <Input placeholder={'email@email.it'} style={styles.input}
+                     rest={{placeholderTextColor: 'rgb(159,159,159)'}}
+                     keyboardType={'email-address'}/>
+            </ItemContainer>
+            <ItemContainer style={styles.labelContainer}>
+              <InputLabel text={'Password'}/>
+            </ItemContainer>
+            <ItemContainer style={styles.inputContainer}>
+              <Input placeholder={'Password'} style={styles.input}
+                     rest={{
+                       secureTextEntry: true,
+                       placeholderTextColor: 'rgb(159,159,159)',
+                     }}/>
+            </ItemContainer>
             <ItemContainer>
-              <Input placeholder={'email@email.it'} style={styles.input}/>
+              <MyButton text={'EFFETTA LA LOGIN'}
+                        color={'#0089FF'}
+                        pressedColor={'#00539C'} styleText={styles.button}/>
+            </ItemContainer>
+            <ItemContainer>
+              <TouchableOpacity
+                  style={
+                    styles.link.container}
+                  onPress={() => navigation.navigate('Registrazione')}
+              >
+                <Text style={[styles.link.text]}>Non sei registrato? Registrati
+                  ora!</Text>
+              </TouchableOpacity>
             </ItemContainer>
           </Card>
         </View>
@@ -32,11 +62,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     paddingHorizontal: 15,
     marginTop: 10,
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
   },
   title: {
     paddingTop: 2,
@@ -62,5 +87,26 @@ const styles = StyleSheet.create({
   labelContainer: {
     paddingHorizontal: 12,
     marginBottom: 5,
+  },
+  inputContainer: {
+    paddingHorizontal: 12,
+    marginBottom: 24,
+  },
+  button: {
+    color: 'white',
+    padding: 10,
+    fontWeight: '800',
+    textAlign: 'center',
+  },
+  link: {
+    container: {
+      height: 40,
+      alignItems: 'center',
+    },
+    text: {
+      fontSize: 14,
+      fontWeight: '500',
+      color: 'black',
+    },
   },
 });

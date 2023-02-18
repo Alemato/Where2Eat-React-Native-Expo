@@ -8,7 +8,7 @@ export default InputLabel;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 12,
-    color: 'rgb(201,201,201)',
+    fontSize: 14,
+    color: 'rgb(47,47,47)',
   },
 });

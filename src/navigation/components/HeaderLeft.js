@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Entypo} from '@expo/vector-icons';
 import {useDrawerStatus} from '@react-navigation/drawer';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export default function HeaderLeft({tintColor: color}) {
   const navigation = useNavigation();
@@ -11,14 +11,15 @@ export default function HeaderLeft({tintColor: color}) {
         <TouchableOpacity onPress={() => {
           navigation.toggleDrawer();
         }}>
-          <Entypo name="menu" size={24} color={color}/>
+          <MaterialCommunityIcons name="menu" size={24} color={color}/>
         </TouchableOpacity>
 
         {navigation.canGoBack() && !isDrawerOpen && (
             <TouchableOpacity style={styles.goBack} onPress={() => {
               navigation.goBack();
             }}>
-              <Entypo name="chevron-left" size={24} color={color}/>
+              <MaterialCommunityIcons name="arrow-left" size={24}
+                                      color={color}/>
             </TouchableOpacity>
         )}
 
