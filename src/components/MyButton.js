@@ -1,6 +1,5 @@
-import {Alert, Pressable, StyleSheet, Text} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
 
 export default function MyButton({
                                    text,
@@ -8,37 +7,14 @@ export default function MyButton({
                                    pressedColor,
                                    styleButton,
                                    styleText,
-                                   setModalVisible,
-                                   modalVisible,
                                    disabled = false,
-                                   pressHandler = () => {
-                                   },
+                                   onPress,
                                  }) {
-  const navigation = useNavigation();
-
-  function dismissModal() {
-    // dispatch redux crea prenotazione e vedi cosa fare
-    setModalVisible(!modalVisible);
-    //modalVisible = true;
-    if (modalVisible) {
-      // spostare nel action crea prenotazione
-      Alert.alert('Prenotazione eseguita', 'Ci vediamo al ristorante', [
-        {
-          text: 'OK', onPress: () => {
-            console.log('OK Pressed vai alle prenotazioni');
-            navigation.navigate('Prenotazioni');
-          },
-        },
-      ]);
-    }
-  }
 
   return (
       <Pressable
           disabled={disabled}
-          onPress={() => {
-            setModalVisible ? dismissModal() : pressHandler();
-          }}
+          onPress={onPress}
           style={({pressed}) => [
             {
               backgroundColor: pressed ? pressedColor : color,

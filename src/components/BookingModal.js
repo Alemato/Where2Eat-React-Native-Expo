@@ -7,9 +7,12 @@ import InputComponent from './InputComponent';
 
 export default function BookingModal({setModalVisible, modalVisible}) {
 
-  const [data, onChangeData] = React.useState('');
-  const [ora, onChangeOra] = React.useState('');
-  const [posti, onChangePosti] = React.useState('');
+  const initialState = '';
+
+  const [data, onChangeData] = React.useState(initialState);
+  const [ora, onChangeOra] = React.useState(initialState);
+  const [posti, onChangePosti] = React.useState(initialState);
+
   return (
       <View style={styles.centeredView}>
         <Modal
@@ -35,13 +38,16 @@ export default function BookingModal({setModalVisible, modalVisible}) {
                                 keyboardType={'numeric'}/>
 
                 <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
-                          setModalVisible={setModalVisible}
-                          modalVisible={modalVisible}
+                          onPress={() => {
+                            setModalVisible(!modalVisible);
+
+                          }}
                           pressedColor={'#00539C'}
+                          styleButton={styles.button}
                           disabled={
-                            !(data !== '' && ora !== '' && posti !== '')
-                          }
-                          styleButton={styles.button}/>
+                            !(data !== '' && data !== ' ' && ora !== '' &&
+                                ora !== ' ' && posti !== '' && posti !== ' ')
+                          }/>
               </CardTextsContainer>
             </View>
           </View>

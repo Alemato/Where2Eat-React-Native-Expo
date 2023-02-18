@@ -72,7 +72,7 @@ export default function RestaurantCard({restaurantCard}) {
             <View style={styles.buttonContent}>
               <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
                         pressedColor={'#00539C'} styleButton={styles.button}
-                        pressHandler={() => {
+                        onPress={() => {
                           navigation.navigate('RestaurantPage',
                               {id: restaurantCard.ristorante.id});
                         }}/>
@@ -97,5 +97,9 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: 'row',
+  },
+  button: {
+    borderRadius: 5,
+    alignItems: 'center',
   },
 });

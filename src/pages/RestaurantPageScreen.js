@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
-import ItemContainer from '../components/ItemContainer';
+import {
+  Alert,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import CardImage from '../components/CardImage';
 import {
   CardRowText,
@@ -12,6 +18,7 @@ import CardRestaurantDetails from '../components/CardRestaurantDetails';
 import RowContainer from '../components/RowContainer';
 import MyButton from '../components/MyButton';
 import BookingModal from '../components/BookingModal';
+import ItemContainer from '../components/ItemContainer';
 
 export default function RestaurantPageScreen({route, navigation}) {
   const {id} = route.params;
@@ -115,8 +122,35 @@ export default function RestaurantPageScreen({route, navigation}) {
     ],
   };
   const [modalVisible, setModalVisible] = useState(false);
-  const toggleModalVisible = (modalVisible) => {
-    setModalVisible(modalVisible);
+
+  const toggleModalVisible = (modalState) => {
+    const successPrenotazione = false;
+    if (modalState) {
+      setModalVisible(modalState);
+    } else {
+      // spostare nel action crea prenotazione
+      if (successPrenotazione) {
+        setModalVisible(modalState);
+        Alert.alert('Prenotazione eseguita', 'Ci vediamo al ristorante', [
+          {
+            text: 'OK', onPress: () => {
+              console.log('OK Pressed vai alle prenotazioni');
+              navigation.navigate('Prenotazioni');
+            },
+          },
+        ]);
+      } else {
+        Alert.alert('Prenotazione non eseguita',
+            'Prova con un altro giorno o un altro orario', [
+              {
+                text: 'OK', onPress: () => {
+                  console.log('NO Prenota di nuovo');
+                },
+              },
+            ]);
+      }
+
+    }
   };
 
   function separator() {
@@ -243,10 +277,14 @@ export default function RestaurantPageScreen({route, navigation}) {
           </CardRestaurantDetails>
         </ScrollView>
         <View style={styles.buttonContent}>
-          <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
-                    setModalVisible={toggleModalVisible}
-                    modalVisible={modalVisible}
-                    pressedColor={'#00539C'} styleButton={styles.button}/>
+          <MyButton
+              onPress={() => {
+                toggleModalVisible(!modalVisible);
+              }}
+              text={'PRENOTA AL RISTORNATE'}
+              color={'#0089FF'}
+              pressedColor={'#00539C'}
+              styleButton={styles.button}/>
         </View>
         <BookingModal setModalVisible={toggleModalVisible}
                       modalVisible={modalVisible}/>
@@ -258,7 +296,7 @@ export default function RestaurantPageScreen({route, navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 15,
+    margin: 10,
     alignItems: 'center',
   },
   image: {
@@ -268,6 +306,7 @@ const styles = StyleSheet.create({
   scroll: {
     width: '100%',
     height: '84%',
+    paddingTop: 15,
   },
   buttonContent: {
     justifyContent: 'center',
