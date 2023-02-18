@@ -9,6 +9,7 @@ export default function MyButton({
                                    styleText,
                                    setModalVisible,
                                    modalVisible,
+                                   disabled = false,
                                  }) {
   function dismissModal() {
     setModalVisible(!modalVisible);
@@ -19,11 +20,13 @@ export default function MyButton({
 
   return (
       <Pressable
+          disabled={disabled}
           onPress={() => setModalVisible ? dismissModal() : null}
           style={({pressed}) => [
             {
               backgroundColor: pressed ? pressedColor : color,
             },
+            disabled ? styles.disabled : '',
             styleButton,
           ]}>
         <Text style={styleText ? styleText : styles.textButton}>{text}</Text>
@@ -37,4 +40,8 @@ const styles = StyleSheet.create({
     padding: 10,
     fontWeight: '800',
   },
+  disabled: {
+    backgroundColor: '#9e9e9e',
+  },
+
 });

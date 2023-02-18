@@ -1,10 +1,15 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, View} from 'react-native';
+import {Modal, StyleSheet, View} from 'react-native';
 import MyButton from './MyButton';
 import {CardTitle} from './typo';
 import CardTextsContainer from './CardTextsContainer';
+import InputComponent from './InputComponent';
 
 export default function BookingModal({setModalVisible, modalVisible}) {
+
+  const [data, onChangeData] = React.useState('');
+  const [ora, onChangeOra] = React.useState('');
+  const [posti, onChangePosti] = React.useState('');
 
   return (
       <View style={styles.centeredView}>
@@ -20,19 +25,25 @@ export default function BookingModal({setModalVisible, modalVisible}) {
             <View style={styles.modalView}>
               <CardTitle title={'Prenota un tavolo'}></CardTitle>
               <CardTextsContainer>
-                <Text style={styles.modalText}>Giorno</Text>
-                <Text style={styles.modalText}>Ora</Text>
-                <Text style={styles.modalText}>Posti</Text>
-
-                {/*TODO input*/}
+                <InputComponent data={data} onChangeData={onChangeData}
+                                placeholder={'Scegli la data'}
+                                keyboardType={'date'}/>
+                <InputComponent data={ora} onChangeData={onChangeOra}
+                                placeholder={'Scegli l\'ora'}
+                                keyboardType={'text'}/>
+                <InputComponent data={posti} onChangeData={onChangePosti}
+                                placeholder={'Numero posti'}
+                                keyboardType={'numeric'}/>
 
                 <MyButton text={'PRENOTA AL RISTORNATE'} color={'#0089FF'}
                           setModalVisible={setModalVisible}
                           modalVisible={modalVisible}
                           pressedColor={'#00539C'}
+                          disabled={
+                            !(data !== '' && ora !== '' && posti !== '')
+                          }
                           styleButton={styles.button}/>
               </CardTextsContainer>
-
             </View>
           </View>
         </Modal>
@@ -48,8 +59,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    width: 350,
-    height: 300,
+    width: 300,
+    height: 380,
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
@@ -76,6 +87,6 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     alignItems: 'center',
-
+    marginTop: 20,
   },
 });
