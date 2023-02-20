@@ -8,7 +8,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import RestaurantPageScreen from '../pages/RestaurantPageScreen';
 import HeaderLeft from './components/HeaderLeft';
 
-const AppStack = createDrawerNavigator();
+const AppDrawer = createDrawerNavigator();
 
 const screenOptions = {
   headerShown: true,
@@ -40,38 +40,38 @@ function getHeaderTitle(route) {
 
 export default function WhereTwoEatNavigator({route}) {
   return (
-      <AppStack.Navigator screenOptions={screenOptions}
-                          drawerContent={CustomDrawerContent}
-                          backBehavior="history">
-        <AppStack.Group screenOptions={screenOptionsGroup}>
-          <AppStack.Screen name="Home"
-                           component={TabNavigator}
-                           options={({route}) => ({
-                             headerTitle: getHeaderTitle(route),
-                             drawerIcon: styleHome.drawerIcon,
-                             headerTitleAlign: 'center',
-                           })}/>
-          <AppStack.Screen name="Prenotazioni"
-                           component={PrenotazioniPageScreen}
-                           options={{
-                             headerTitleAlign: 'center',
-                             drawerIcon: (props) => <DrawerIcon {...props}
-                                                                name="note-add"/>,
-                           }}/>
-          <AppStack.Screen name="DatiUtente" component={DatiUtentePageScreen}
-                           options={{
-                             headerTitleAlign: 'center',
-                             drawerIcon: (props) => <DrawerIcon {...props}
-                                                                name="supervisor-account"/>,
-                           }}/>
-          <AppStack.Screen name="RestaurantPage"
-                           component={RestaurantPageScreen}
-                           options={{
-                             headerTitleAlign: 'center',
-                             drawerItemStyle: {height: 0},
-                           }}/>
-        </AppStack.Group>
-      </AppStack.Navigator>
+      <AppDrawer.Navigator screenOptions={screenOptions}
+                           drawerContent={CustomDrawerContent}
+                           backBehavior="history">
+        <AppDrawer.Group screenOptions={screenOptionsGroup}>
+          <AppDrawer.Screen name="Home"
+                            component={TabNavigator}
+                            options={({route}) => ({
+                              headerTitle: getHeaderTitle(route),
+                              drawerIcon: styleHome.drawerIcon,
+                              headerTitleAlign: 'center',
+                            })}/>
+          <AppDrawer.Screen name="Prenotazioni"
+                            component={PrenotazioniPageScreen}
+                            options={{
+                              headerTitleAlign: 'center',
+                              drawerIcon: (props) => <DrawerIcon {...props}
+                                                                 name="note-add"/>,
+                            }}/>
+          <AppDrawer.Screen name="DatiUtente" component={DatiUtentePageScreen}
+                            options={{
+                              headerTitleAlign: 'center',
+                              drawerIcon: (props) => <DrawerIcon {...props}
+                                                                 name="supervisor-account"/>,
+                            }}/>
+          <AppDrawer.Screen name="RestaurantPage"
+                            component={RestaurantPageScreen}
+                            options={{
+                              headerTitleAlign: 'center',
+                              drawerItemStyle: {height: 0},
+                            }}/>
+        </AppDrawer.Group>
+      </AppDrawer.Navigator>
   );
 }
 

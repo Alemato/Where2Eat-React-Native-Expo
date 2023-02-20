@@ -4,10 +4,42 @@ import Card from '../components/Card';
 import {InputLabel, Title} from '../components/typo';
 import Input from '../components/Input';
 import MyButton from '../components/MyButton';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  sLoginRegistrazioneLoginFormEmail,
+  sLoginRegistrazioneLoginFormPassword,
+} from '../selectors';
+import {useCallback} from 'react';
+import {
+  loginFormChangeEmail,
+  loginFormChangePassword,
+  resetLoginForm,
+} from '../reducers/LoginRegistrazioneReducer';
+import {appSignIn} from '../actions/AppActions';
 
 export default function LoginPageScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const email = useSelector(sLoginRegistrazioneLoginFormEmail);
+  const password = useSelector(sLoginRegistrazioneLoginFormPassword);
+
+  useFocusEffect(useCallback(function() {
+    dispatch(resetLoginForm());
+  }, []));
+
+  function handleChangeTextEmail(email) {
+    dispatch(loginFormChangeEmail(email));
+  }
+
+  function handleChangeTextPassword(password) {
+    dispatch(loginFormChangePassword(password));
+  }
+
+  function handleOnPressLogin() {
+    dispatch(appSignIn());
+  }
+
   return (
       <View style={styles.pageContainer}>
         <View style={styles.cardContainer}>
@@ -20,6 +52,8 @@ export default function LoginPageScreen() {
             </ItemContainer>
             <ItemContainer style={styles.inputContainer}>
               <Input placeholder={'email@email.it'} style={styles.input}
+                     onChangeData={handleChangeTextEmail}
+                     data={email}
                      rest={{placeholderTextColor: 'rgb(159,159,159)'}}
                      keyboardType={'email-address'}/>
             </ItemContainer>
@@ -28,6 +62,8 @@ export default function LoginPageScreen() {
             </ItemContainer>
             <ItemContainer style={styles.inputContainer}>
               <Input placeholder={'Password'} style={styles.input}
+                     data={password}
+                     onChangeData={handleChangeTextPassword}
                      rest={{
                        secureTextEntry: true,
                        placeholderTextColor: 'rgb(159,159,159)',
@@ -36,7 +72,11 @@ export default function LoginPageScreen() {
             <ItemContainer>
               <MyButton text={'EFFETTA LA LOGIN'}
                         color={'#0089FF'}
-                        pressedColor={'#00539C'} styleText={styles.button}/>
+                        pressedColor={'#00539C'} styleText={styles.button}
+                        disabled={!(email != null && email !== '' && password !=
+                            null && password !== '')}
+                        onPress={handleOnPressLogin}
+              />
             </ItemContainer>
             <ItemContainer>
               <TouchableOpacity

@@ -19,37 +19,31 @@ export const LoginRegistrazioneSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     resetLoginForm: (state) => {
-      console.log(state);
       state.loginForm = INITIAL_STATE.loginForm;
     },
     loginFormChangeEmail: (state, action) => {
-      console.log(state);
-      console.log(action);
       state.loginForm.email = action.payload;
     },
     loginFormChangePassword: (state, action) => {
-      console.log(state);
-      console.log(action);
       state.loginForm.password = action.payload;
     },
     resetRegistratiForm: (state) => {
-      console.log(state);
-      state.resetRegistratiForm = INITIAL_STATE.registratiForm;
+      state.registratiForm = INITIAL_STATE.registratiForm;
     },
     registratiChangeNome: (state, action) => {
-      state.resetRegistratiForm.nome = action.payload;
+      state.registratiForm.nome = action.payload;
     },
     registratiChangeCognome: (state, action) => {
-      state.resetRegistratiForm.cognome = action.payload;
+      state.registratiForm.cognome = action.payload;
     },
     registratiChangeTelefono: (state, action) => {
-      state.resetRegistratiForm.telefono = action.payload;
+      state.registratiForm.telefono = action.payload;
     },
     registratiChangeEmail: (state, action) => {
-      state.resetRegistratiForm.email = action.payload;
+      state.registratiForm.email = action.payload;
     },
     registratiChangePassword: (state, action) => {
-      state.resetRegistratiForm.password = action.payload;
+      state.registratiForm.password = action.payload;
     },
   },
 });

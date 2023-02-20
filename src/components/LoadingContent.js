@@ -1,7 +1,9 @@
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {sAppLoading} from '../selectors';
 
 export default function LoadingContent({children, style}) {
-  const loading = false;
+  const loading = useSelector(sAppLoading);
   return (
       <View style={[
         styles.container,

@@ -14,15 +14,28 @@ import {
 
 import AppReducer from '../reducers/AppReducer';
 import LoginRegistrazioneReducer from '../reducers/LoginRegistrazioneReducer';
+import {
+  LOGIN,
+  LOGIN_REJECTED,
+  REGISTRAZIONE,
+  REGISTRAZIONE_REJECTED,
+} from '../actions/action-types';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['loginRegistrati'],
+  blacklist: ['app', 'loginRegistrati'],
+};
+
+const persistConfigAppReducer = {
+  key: 'app',
+  storage: AsyncStorage,
+  blacklist: ['loading'],
 };
 
 const reducers = combineReducers({
-  app: AppReducer,
+  app: persistReducer(persistConfigAppReducer, AppReducer),
+  //app: AppReducer,
   loginRegistrati: LoginRegistrazioneReducer,
 });
 
@@ -33,7 +46,17 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          ignoredActions: [
+            FLUSH,
+            REHYDRATE,
+            PAUSE,
+            PERSIST,
+            PURGE,
+            REGISTER,
+            LOGIN,
+            LOGIN_REJECTED,
+            REGISTRAZIONE,
+            REGISTRAZIONE_REJECTED],
         },
       }).concat(promise),
 });
