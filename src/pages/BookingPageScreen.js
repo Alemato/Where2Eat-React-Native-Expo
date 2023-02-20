@@ -1,5 +1,6 @@
-import {StatusBar, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import ItemContainer from '../components/ItemContainer';
+import {Title} from '../components/typo';
 
 export default function BookingPageScreen() {
   const prenotazioni = [
@@ -197,15 +198,56 @@ export default function BookingPageScreen() {
     },
   ];
 
+  function divisioneListe() {
+    console.log(prenotazioni.filter(
+        p => p.statoPrenotazione === 0 || p.statoPrenotazione === 1));
+    console.log(prenotazioni.filter(
+        p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
+            3 || p.statoPrenotazione === 4));
+    return {
+      primoGrupo: prenotazioni.filter(
+          p => p.statoPrenotazione === 0 || p.statoPrenotazione === 1),
+      secondoGrupo: prenotazioni.filter(
+          p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
+              3 || p.statoPrenotazione === 4),
+    };
+  }
+
   return (
       <ItemContainer style={styles.container}>
+        <Title title={'Prossime Prenotazioni'}/>
+        {/*<ScrollView style={styles.list}>
+          {divisioneListe().map((item, index) => {
+                return <BookingCard
+                    prenotazioneCard={divisioneListe().primoGrupo}
+                    key={index}/>;
+              })}
+          {divisioneListe().map((item, index) => {
+                return <BookingCard
+                    prenotazioneCard={divisioneListe().secondoGrupo}
+                    key={index}/>;
+              })}
+        </ScrollView>*/}
+
+
         {/*<FlatList style={styles.list}
-                  data={prenotazioni}
-                  renderItem={({item}) =>
-                  }/>}
+                  data={prenotazioni.filter(
+                      p => p.statoPrenotazione === 0 || p.statoPrenotazione ===
+                          1)}
+                  renderItem={({item}) => <BookingCard
+                      prenotazioneCard={{prenotazione: item}}/>}
+                  keyExtractor={(item) => item.id}
+        />
+
+        <Title title={'Prenotazioni Passate'}/>
+        <FlatList style={styles.list}
+                  data={prenotazioni.filter(
+                      p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
+                          3 || p.statoPrenotazione === 4)}
+                  renderItem={({item}) => <BookingCard
+                      prenotazioneCard={{prenotazione: item}}/>}
                   keyExtractor={(item) => item.id}
         />*/}
-        <StatusBar style="auto"/>
       </ItemContainer>
   );
 }

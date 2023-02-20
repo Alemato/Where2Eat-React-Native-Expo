@@ -1,12 +1,12 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {MaterialIcons} from '@expo/vector-icons';
 import CustomDrawerContent from './components/CustomDrawerContent';
-import PrenotazioniPageScreen from '../pages/PrenotazioniPageScreen';
 import DatiUtentePageScreen from '../pages/DatiUtentePageScreen';
 import TabNavigator from './TabNavigator';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import RestaurantPageScreen from '../pages/RestaurantPageScreen';
 import HeaderLeft from './components/HeaderLeft';
+import BookingPageScreen from '../pages/BookingPageScreen';
 
 const AppDrawer = createDrawerNavigator();
 
@@ -52,7 +52,7 @@ export default function WhereTwoEatNavigator({route}) {
                               headerTitleAlign: 'center',
                             })}/>
           <AppDrawer.Screen name="Prenotazioni"
-                            component={PrenotazioniPageScreen}
+                            component={BookingPageScreen}
                             options={{
                               headerTitleAlign: 'center',
                               drawerIcon: (props) => <DrawerIcon {...props}

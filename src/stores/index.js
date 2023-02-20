@@ -14,6 +14,7 @@ import {
 
 import AppReducer from '../reducers/AppReducer';
 import LoginRegistrazioneReducer from '../reducers/LoginRegistrazioneReducer';
+import CreateBookingReducer from '../reducers/CreateBookingReducer';
 import {
   LOGIN,
   LOGIN_REJECTED,
@@ -24,7 +25,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['app', 'loginRegistrati'],
+  blacklist: ['app', 'loginRegistrati', 'createBooking'],
 };
 
 const persistConfigAppReducer = {
@@ -35,6 +36,7 @@ const persistConfigAppReducer = {
 
 const reducers = combineReducers({
   app: persistReducer(persistConfigAppReducer, AppReducer),
+  createBooking: CreateBookingReducer,
   //app: AppReducer,
   loginRegistrati: LoginRegistrazioneReducer,
 });

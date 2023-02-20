@@ -1,17 +1,45 @@
-import React from 'react';
-import {Modal, StyleSheet, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {Modal, StyleSheet, Text, View} from 'react-native';
 import MyButton from './MyButton';
 import {CardTitle} from './typo';
-import CardTextsContainer from './CardTextsContainer';
-import Input from './Input';
+import ItemContainer from './ItemContainer';
+import DateInput from './DateInput';
+import TimeInput from './TimeInput';
+import RowContainer from './RowContainer';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  sCreateBookingDate,
+  sCreateBookingDay,
+  sCreateBookingMonth,
+  sCreateBookingSeat,
+  sCreateBookingTime,
+  sCreateBookingYear,
+} from '../selectors';
+import SeatInput from './SeatInput';
+import {useFocusEffect} from '@react-navigation/native';
+import {resetBookingForm} from '../reducers/CreateBookingReducer';
 
 export default function BookingModal({setModalVisible, modalVisible}) {
 
-  const initialState = '';
+  const dispatch = useDispatch();
+  const date = useSelector(sCreateBookingDate);
+  const time = useSelector(sCreateBookingTime);
+  const seat = useSelector(sCreateBookingSeat);
+  const day = useSelector(sCreateBookingDay);
+  const month = useSelector(sCreateBookingMonth);
+  const year = useSelector(sCreateBookingYear);
 
-  const [date, onChangeData] = React.useState(initialState);
-  const [time, onChangeOra] = React.useState(initialState);
-  const [seat, onChangePosti] = React.useState(initialState);
+  useFocusEffect(useCallback(function() {
+    dispatch(resetBookingForm());
+  }, []));
+
+  function checkDate() {
+    return !(date != null && date !== '' && time != null &&
+        time !== '' && seat != null && seat !== '' &&
+        seat !== ' ' && year.length === 4 &&
+        new Date(year + '/' + month + '/' + day).setHours(0, 0, 0, 0) >=
+        new Date(Date.now()).setHours(0, 0, 0, 0) && seat > 0);
+  }
 
   return (
       <View style={styles.centeredView}>
@@ -26,30 +54,36 @@ export default function BookingModal({setModalVisible, modalVisible}) {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <CardTitle title={'Prenota un tavolo'}></CardTitle>
-              <CardTextsContainer>
-                <Input data={date} onChangeData={onChangeData}
-                       placeholder={'Scegli la data'}
-                       keyboardType={'date'}/>
-                <Input data={time} onChangeData={onChangeOra}
-                       placeholder={'Scegli l\'ora'}
-                       keyboardType={'text'}/>
-                <Input data={seat} onChangeData={onChangePosti}
-                       placeholder={'Numero posti'}
-                       keyboardType={'numeric'}/>
+              <ItemContainer style={styles.rowData}>
+                <RowContainer>
+                  <Text style={styles.text}>Data : </Text>
+                  <DateInput/>
+                </RowContainer>
+              </ItemContainer>
+              <ItemContainer style={styles.rowOra}>
+                <RowContainer>
+                  <Text style={styles.text}>Ora : </Text>
+                  <TimeInput/>
+                </RowContainer>
+              </ItemContainer>
+              <ItemContainer style={styles.rowPosti}>
+                <RowContainer>
+                  <Text style={styles.text}>Posti : </Text>
+                  <SeatInput/>
+                </RowContainer>
+              </ItemContainer>
 
-                <MyButton text={'PRENOTA AL RISTORNATE'}
-                          color={'#0089FF'}
-                          pressedColor={'#00539C'}
-                          styleButton={styles.button}
-                          onPress={() => {
-                            setModalVisible(!modalVisible);
+              <MyButton text={'PRENOTA AL RISTORNATE'}
+                        color={'#0089FF'}
+                        pressedColor={'#00539C'}
+                        styleButton={styles.button}
+                        onPress={() => {
+                          setModalVisible(!modalVisible);
 
-                          }}
-                          disabled={
-                            !(date !== '' && date !== ' ' && time !== '' &&
-                                time !== ' ' && seat !== '' && seat !== ' ')
-                          }/>
-              </CardTextsContainer>
+                        }}
+                        disabled={
+                          checkDate()
+                        }/>
             </View>
           </View>
         </Modal>
@@ -71,14 +105,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     paddingVertical: 35,
+    paddingHorizontal: 35,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    justifyContent: 'center',
     elevation: 5,
   },
   textStyle: {
@@ -94,5 +123,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginTop: 20,
+  },
+  labelContainer: {
+    paddingHorizontal: 12,
+    marginBottom: 5,
+  },
+  text: {
+    fontSize: 15,
+    fontWeight: '400',
+    marginTop: 14,
+  },
+  rowData: {
+    marginStart: 48,
+  },
+  rowOra: {
+    marginStart: 68,
+  },
+  rowPosti: {
+    marginStart: 85,
   },
 });

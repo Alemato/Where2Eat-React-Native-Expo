@@ -1,9 +1,9 @@
 import {StyleSheet, View} from 'react-native';
 import {CardRowText} from './typo';
 
-function Badge({colorStyle, styleText, text}) {
+function Badge({colorStyle, styleText, text, badgeStyle}) {
   return (
-      <View style={[colorStyle, styles.badge]}>
+      <View style={[badgeStyle ? badgeStyle : styles.badge, colorStyle]}>
         <CardRowText style={styleText ? styleText : styles.text} text={text}/>
       </View>);
 }
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
+    textAlign: 'center',
     fontSize: 15,
     fontWeight: '500',
     marginTop: 5,
