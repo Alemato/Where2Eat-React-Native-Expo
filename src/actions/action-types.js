@@ -45,3 +45,12 @@ export const GET_RISTORANTE_FULFILLED_ACTION = createAction(
     `${GET_RISTORANTE}_${ActionType.Fulfilled}`);
 export const GET_RISTORANTE_REJECTED_ACTION = createAction(
     `${GET_RISTORANTE}_${ActionType.Rejected}`);
+
+export const RICERCA = 'RICERCA';
+export const RICERCA_REJECTED = `${RICERCA}_${ActionType.Rejected}`;
+export const RICERCA_PENDING_ACTION = createAction(
+    `${RICERCA}_${ActionType.Pending}`);
+export const RICERCA_FULFILLED_ACTION = createAction(
+    `${RICERCA}_${ActionType.Fulfilled}`);
+export const RICERCA_REJECTED_ACTION = createAction(
+    `${RICERCA}_${ActionType.Rejected}`);

@@ -71,6 +71,28 @@ class Api {
         {headers: {Authorization: `Bearer ${token}`}}).
         then((response) => serializerResponse(response));
   }
+
+  static ricerca({dove, cosa, token}) {
+    let params = undefined;
+    if (dove != null && cosa != null) {
+      params = {cosa: cosa, dove: dove};
+    } else if (dove != null) {
+      params = {dove: dove};
+    }
+    console.log(params);
+    if (params !== undefined) {
+      return axios.get(API_URL + 'ristoranti/search/',
+          {
+            headers: {Authorization: `Bearer ${token}`},
+            params: params,
+          }).
+          then((response) => serializerResponse(response));
+    } else {
+      return axios.get(API_URL + 'ristoranti/search/',
+          {headers: {Authorization: `Bearer ${token}`}}).
+          then((response) => serializerResponse(response));
+    }
+  }
 }
 
 export default Api;

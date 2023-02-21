@@ -15,6 +15,9 @@ import {
   REGISTRAZIONE_FULFILLED_ACTION,
   REGISTRAZIONE_PENDING_ACTION,
   REGISTRAZIONE_REJECTED_ACTION,
+  RICERCA_FULFILLED_ACTION,
+  RICERCA_PENDING_ACTION,
+  RICERCA_REJECTED_ACTION,
 } from '../actions/action-types';
 
 const INITIAL_STATE = {
@@ -55,7 +58,7 @@ export const AppSlice = createSlice({
     builder.addMatcher(
         isAnyOf(LOGIN_PENDING_ACTION, REGISTRAZIONE_PENDING_ACTION,
             MODIFICA_ACCOUNT_PENDING_ACTION, GET_HOME_PENDING_ACTION,
-            GET_RISTORANTE_PENDING_ACTION),
+            GET_RISTORANTE_PENDING_ACTION, RICERCA_PENDING_ACTION),
         (state, action) => {
           state.loading = true;
         }).
@@ -64,7 +67,8 @@ export const AppSlice = createSlice({
                 MODIFICA_ACCOUNT_FULFILLED_ACTION,
                 MODIFICA_ACCOUNT_REJECTED_ACTION, GET_HOME_FULFILLED_ACTION,
                 GET_HOME_REJECTED_ACTION, GET_RISTORANTE_FULFILLED_ACTION,
-                GET_RISTORANTE_REJECTED_ACTION),
+                GET_RISTORANTE_REJECTED_ACTION, RICERCA_FULFILLED_ACTION,
+                RICERCA_REJECTED_ACTION),
             (state, action) => {
               state.loading = false;
             });

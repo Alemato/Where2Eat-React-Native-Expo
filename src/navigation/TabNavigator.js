@@ -20,11 +20,9 @@ const screenOptions = {
   },
 };
 
-export default function TabNavigator({navigation, route}) {
+export default function TabNavigator() {
   return (
-      <Tab.Navigator screenOptions={screenOptions}
-          // tabBar={(props) => <MyTabBar {...props} />}
-      >
+      <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name={'HomePageTab'}
                     component={HomePageScreen}
                     options={{

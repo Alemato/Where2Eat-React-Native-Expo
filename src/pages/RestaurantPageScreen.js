@@ -37,7 +37,7 @@ export default function RestaurantPageScreen({route, navigation}) {
     } else {
       dispatch(getServerRistorante(id));
     }
-  }, [ristorante]));
+  }, [ristorante, id]));
 
   useFocusEffect(useCallback(function() {
     return () => {

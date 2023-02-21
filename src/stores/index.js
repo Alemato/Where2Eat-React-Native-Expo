@@ -26,6 +26,8 @@ import {
   MODIFICA_ACCOUNT_REJECTED,
   REGISTRAZIONE,
   REGISTRAZIONE_REJECTED,
+  RICERCA,
+  RICERCA_REJECTED,
 } from '../actions/action-types';
 import DatiAccountReducer from '../reducers/DatiAccountReducer';
 import RistorantiReducer from '../reducers/RistorantiReducer';
@@ -80,6 +82,8 @@ export const store = configureStore({
             GET_HOME_REJECTED,
             GET_RISTORANTE,
             GET_RISTORANTE_REJECTED,
+            RICERCA,
+            RICERCA_REJECTED,
           ],
         },
       }).concat(promise),
