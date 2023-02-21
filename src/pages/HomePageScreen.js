@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {sRistoranti} from '../selectors';
 import {resetRistoranti} from '../reducers/RistorantiReducer';
 import {getServerRistoranti} from '../actions/RistorantiActions';
+import {Title} from '../components/typo';
 
 export default function HomePageScreen() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function HomePageScreen() {
   }, []));
   return (
       <ItemContainer style={styles.container}>
+        <Title title={'I Ristoranti più scelti'}/>
         {(ristoranti == null || ristoranti.length === 0) &&
             <Text style={styles.text}>Nessun ristorante Disponibile</Text>}
         {(ristoranti != null && ristoranti.length > 0) &&
