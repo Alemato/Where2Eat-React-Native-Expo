@@ -18,3 +18,12 @@ export const REGISTRAZIONE_FULFILLED_ACTION = createAction(
     `${REGISTRAZIONE}_${ActionType.Fulfilled}`);
 export const REGISTRAZIONE_REJECTED_ACTION = createAction(
     `${REGISTRAZIONE}_${ActionType.Rejected}`);
+
+export const MODIFICA_ACCOUNT = 'MODIFICA_ACCOUNT';
+export const MODIFICA_ACCOUNT_REJECTED = `${MODIFICA_ACCOUNT}_${ActionType.Rejected}`;
+export const MODIFICA_ACCOUNT_PENDING_ACTION = createAction(
+    `${MODIFICA_ACCOUNT}_${ActionType.Pending}`);
+export const MODIFICA_ACCOUNT_FULFILLED_ACTION = createAction(
+    `${MODIFICA_ACCOUNT}_${ActionType.Fulfilled}`);
+export const MODIFICA_ACCOUNT_REJECTED_ACTION = createAction(
+    `${MODIFICA_ACCOUNT}_${ActionType.Rejected}`);

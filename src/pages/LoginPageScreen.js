@@ -25,7 +25,9 @@ export default function LoginPageScreen() {
   const password = useSelector(sLoginRegistrazioneLoginFormPassword);
 
   useFocusEffect(useCallback(function() {
-    dispatch(resetLoginForm());
+    return () => {
+      dispatch(resetLoginForm());
+    };
   }, []));
 
   function handleChangeTextEmail(email) {

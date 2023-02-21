@@ -18,14 +18,17 @@ import CreateBookingReducer from '../reducers/CreateBookingReducer';
 import {
   LOGIN,
   LOGIN_REJECTED,
+  MODIFICA_ACCOUNT,
+  MODIFICA_ACCOUNT_REJECTED,
   REGISTRAZIONE,
   REGISTRAZIONE_REJECTED,
 } from '../actions/action-types';
+import DatiAccountReducer from '../reducers/DatiAccountReducer';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['app', 'loginRegistrati', 'createBooking'],
+  blacklist: ['app', 'loginRegistrati', 'createBooking', 'datiAccount'],
 };
 
 const persistConfigAppReducer = {
@@ -35,10 +38,11 @@ const persistConfigAppReducer = {
 };
 
 const reducers = combineReducers({
+//app: AppReducer,
   app: persistReducer(persistConfigAppReducer, AppReducer),
-  createBooking: CreateBookingReducer,
-  //app: AppReducer,
   loginRegistrati: LoginRegistrazioneReducer,
+  createBooking: CreateBookingReducer,
+  datiAccount: DatiAccountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -58,7 +62,10 @@ export const store = configureStore({
             LOGIN,
             LOGIN_REJECTED,
             REGISTRAZIONE,
-            REGISTRAZIONE_REJECTED],
+            REGISTRAZIONE_REJECTED,
+            MODIFICA_ACCOUNT,
+            MODIFICA_ACCOUNT_REJECTED,
+          ],
         },
       }).concat(promise),
 });

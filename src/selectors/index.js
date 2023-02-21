@@ -1,3 +1,4 @@
 export * from './AppSelectors';
-export * from './CreateBookingSelectors';
 export * from './LoginRegistrazioneSelectors';
+export * from './CreateBookingSelectors';
+export * from './DatiAccountSelectors';

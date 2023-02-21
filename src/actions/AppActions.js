@@ -6,7 +6,10 @@ import {LOGIN} from './action-types';
 import Api, {TOKEN_JWT_NAME} from '../api/Api';
 import {Alert} from 'react-native';
 import {erroreInternoApp, erroreInternoServer} from './actionConstants';
-import {resetLoginForm} from '../reducers/LoginRegistrazioneReducer';
+import {
+  resetLoginForm,
+  resetRegistratiForm,
+} from '../reducers/LoginRegistrazioneReducer';
 import {loginSuccess} from '../reducers/AppReducer';
 
 export function appSignIn() {
@@ -22,6 +25,8 @@ export function appSignIn() {
           console.log('response: ', response);
           dispatch(loginSuccess(
               {user: response.data, token: response.headers[TOKEN_JWT_NAME]}));
+          dispatch(resetLoginForm);
+          dispatch(resetRegistratiForm);
         },
     ).catch(function(error) {
       console.log('error');

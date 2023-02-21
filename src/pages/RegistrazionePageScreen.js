@@ -33,7 +33,9 @@ export default function RegistrazionePageScreen() {
   const password = useSelector(sLoginRegistrazioneRegistratiFormPassword);
 
   useFocusEffect(useCallback(function() {
-    dispatch(resetRegistratiForm());
+    return () => {
+      dispatch(resetRegistratiForm());
+    };
   }, []));
 
   function handleChangeTextNome(nome) {

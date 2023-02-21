@@ -46,10 +46,10 @@ class Api {
     return axios.patch(API_URL + 'account', {
       nome: nome,
       cognome: cognome,
-      telefono: telefono,
-      email: email,
       statoAccount: statoAccount,
       ruolo: ruolo,
+      email: email,
+      telefono: telefono,
     }, {headers: {Authorization: `Bearer ${token}`}}).
         then((response) => serializerResponse(response));
   }
