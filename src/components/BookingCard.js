@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import ItemContainer from './ItemContainer';
 import Card from './Card';
@@ -8,11 +8,16 @@ import CardTextsContainer from './CardTextsContainer';
 import Badge from './Bedge';
 import MyButton from './MyButton';
 import RowContainer from './RowContainer';
+import BookingCancelModal from './BookingCancelModal';
+import {patchServerBookings} from '../actions/BookingActions';
+import {useDispatch} from 'react-redux';
 
-export default function BookingCard({prenotazioneCard}) {
+export default function BookingCard({prenotazione}) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   function statoPrenotazioneText() {
-    switch (prenotazioneCard.prenotazione.statoPrenotazione) {
+    switch (prenotazione.statoPrenotazione) {
       case 1:
         return {nome: 'Confermato', color: styles.bedgeGreen};
       case 2:
@@ -26,6 +31,23 @@ export default function BookingCard({prenotazioneCard}) {
     }
   }
 
+  const toggleModalVisible = (modalState, annullato) => {
+    console.log('ristorante: ' + prenotazione.ristorante.id,
+        'prenotazione: ' + prenotazione.id);
+    if (modalState) {
+      setModalVisible(modalState);
+    } else {
+      if (annullato) {
+        console.log('prenotazione da annullare');
+        setModalVisible(modalState);
+        dispatch(patchServerBookings(prenotazione.ristorante.id,
+            prenotazione.id, 4));
+      } else {
+        setModalVisible(modalState);
+      }
+    }
+  };
+
   return (
       <ItemContainer style={styles.cardContainer}>
         <Card>
@@ -33,14 +55,14 @@ export default function BookingCard({prenotazioneCard}) {
             <RowContainer>
               <View style={{width: '65%'}}>
                 <CardTitle
-                    title={prenotazioneCard.prenotazione.ristorante.ragioneSociale}/>
+                    title={prenotazione.ristorante.ragioneSociale}/>
                 <Badge text={statoPrenotazioneText().nome}
                        badgeStyle={styles.badge}
                        colorStyle={statoPrenotazioneText().color}/>
                 <CardRowText
-                    text={prenotazioneCard.prenotazione.ristorante.localita +
+                    text={prenotazione.ristorante.localita +
                         ' - ' +
-                        prenotazioneCard.prenotazione.ristorante.indirizzo}/>
+                        prenotazione.ristorante.indirizzo}/>
               </View>
               <View style={{width: '35%'}}>
                 <CardImage style={styles.image}
@@ -51,26 +73,33 @@ export default function BookingCard({prenotazioneCard}) {
 
             <RowContainer style={styles.rowContainer}>
               <CardRowText style={styles.text}
-                           text={prenotazioneCard.prenotazione.data}/>
+                           text={prenotazione.data}/>
               <ItemHorizontalListSeparator/>
               <CardRowText style={styles.text}
-                           text={prenotazioneCard.prenotazione.ora}/>
+                           text={prenotazione.ora}/>
               <ItemHorizontalListSeparator/>
               <CardRowText style={styles.text}
-                           text={prenotazioneCard.prenotazione.numeroPosti}/>
+                           text={prenotazione.numeroPosti}/>
 
             </RowContainer>
             <View style={styles.buttonContent}>
-              {(prenotazioneCard.prenotazione.statoPrenotazione === 0 ||
-                      prenotazioneCard.prenotazione.statoPrenotazione === 1) &&
-                  <MyButton text={'ANNULLA'} color={'red'}
-                            pressedColor={'#00539C'}
-                            styleButton={styles.button}/>
+              {(prenotazione.statoPrenotazione === 0 ||
+                      prenotazione.statoPrenotazione === 1) &&
+                  <MyButton
+                      onPress={() => {
+                        toggleModalVisible(!modalVisible, false,
+                            prenotazione.id, prenotazione.ristorante.id);
+                      }}
+                      text={'ANNULLA'} color={'red'}
+                      pressedColor={'darkred'}
+                      styleButton={styles.button}/>
               }
 
             </View>
           </CardTextsContainer>
         </Card>
+        <BookingCancelModal setModalVisible={toggleModalVisible}
+                            modalVisible={modalVisible}/>
       </ItemContainer>
   );
 }
@@ -111,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   badge: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 8,
     marginTop: 5,
     paddingBottom: 5,
     backgroundColor: 'grey',

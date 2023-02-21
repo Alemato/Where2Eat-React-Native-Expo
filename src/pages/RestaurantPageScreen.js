@@ -1,12 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {
-  Alert,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   CardRowText,
   CardTitle,
@@ -25,6 +18,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {getServerRistorante} from '../actions/RistorantiActions';
 import {resetRistoranti} from '../reducers/RistorantiReducer';
 import {IMAGE_API_URL} from '../api/Api';
+import {createServerBooking} from '../actions/BookingActions';
 
 export default function RestaurantPageScreen({route, navigation}) {
   const {id} = route.params;
@@ -48,33 +42,14 @@ export default function RestaurantPageScreen({route, navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const toggleModalVisible = (modalState) => {
-    const successPrenotazione = false;
+
     if (modalState) {
       setModalVisible(modalState);
     } else {
-      // spostare nel action crea prenotazione
-      if (successPrenotazione) {
-        setModalVisible(modalState);
-        Alert.alert('Prenotazione eseguita', 'Ci vediamo al ristorante', [
-          {
-            text: 'OK', onPress: () => {
-              console.log('OK Pressed vai alle prenotazioni');
-              navigation.navigate('Prenotazioni');
-            },
-          },
-        ]);
-      } else {
-        Alert.alert('Prenotazione non eseguita',
-            'Prova con un altro giorno o un altro orario', [
-              {
-                text: 'OK', onPress: () => {
-                  console.log('NO Prenota di nuovo');
-                },
-              },
-            ]);
-      }
-
+      setModalVisible(modalState);
+      dispatch(createServerBooking(id));
     }
+
   };
 
   function separator() {

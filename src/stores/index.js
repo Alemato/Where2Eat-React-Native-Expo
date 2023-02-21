@@ -16,6 +16,10 @@ import AppReducer from '../reducers/AppReducer';
 import LoginRegistrazioneReducer from '../reducers/LoginRegistrazioneReducer';
 import CreateBookingReducer from '../reducers/CreateBookingReducer';
 import {
+  CREATE_BOOKINGS,
+  CREATE_BOOKINGS_REJECTED,
+  GET_BOOKINGS,
+  GET_BOOKINGS_REJECTED,
   GET_HOME,
   GET_HOME_REJECTED,
   GET_RISTORANTE,
@@ -24,6 +28,8 @@ import {
   LOGIN_REJECTED,
   MODIFICA_ACCOUNT,
   MODIFICA_ACCOUNT_REJECTED,
+  PATCH_BOOKINGS,
+  PATCH_BOOKINGS_REJECTED,
   REGISTRAZIONE,
   REGISTRAZIONE_REJECTED,
   RICERCA,
@@ -31,6 +37,7 @@ import {
 } from '../actions/action-types';
 import DatiAccountReducer from '../reducers/DatiAccountReducer';
 import RistorantiReducer from '../reducers/RistorantiReducer';
+import bookingsReducer from '../reducers/BookingsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -40,7 +47,8 @@ const persistConfig = {
     'loginRegistrati',
     'createBooking',
     'datiAccount',
-    'ristoranti'],
+    'ristoranti',
+    'bookings'],
 };
 
 const persistConfigAppReducer = {
@@ -56,6 +64,7 @@ const reducers = combineReducers({
   createBooking: CreateBookingReducer,
   datiAccount: DatiAccountReducer,
   ristoranti: RistorantiReducer,
+  bookings: bookingsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -84,6 +93,12 @@ export const store = configureStore({
             GET_RISTORANTE_REJECTED,
             RICERCA,
             RICERCA_REJECTED,
+            GET_BOOKINGS,
+            GET_BOOKINGS_REJECTED,
+            PATCH_BOOKINGS,
+            PATCH_BOOKINGS_REJECTED,
+            CREATE_BOOKINGS,
+            CREATE_BOOKINGS_REJECTED,
           ],
         },
       }).concat(promise),

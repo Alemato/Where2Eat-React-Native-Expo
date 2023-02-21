@@ -28,6 +28,33 @@ export const MODIFICA_ACCOUNT_FULFILLED_ACTION = createAction(
 export const MODIFICA_ACCOUNT_REJECTED_ACTION = createAction(
     `${MODIFICA_ACCOUNT}_${ActionType.Rejected}`);
 
+export const GET_BOOKINGS = 'BOOKINGS';
+export const GET_BOOKINGS_REJECTED = `${GET_BOOKINGS}_${ActionType.Rejected}`;
+export const GET_BOOKINGS_PENDING_ACTION = createAction(
+    `${GET_BOOKINGS}_${ActionType.Pending}`);
+export const GET_BOOKINGS_FULFILLED_ACTION = createAction(
+    `${GET_BOOKINGS}_${ActionType.Fulfilled}`);
+export const GET_BOOKINGS_REJECTED_ACTION = createAction(
+    `${GET_BOOKINGS}_${ActionType.Rejected}`);
+
+export const PATCH_BOOKINGS = 'PATCH_BOOKINGS';
+export const PATCH_BOOKINGS_REJECTED = `${PATCH_BOOKINGS}_${ActionType.Rejected}`;
+export const PATCH_BOOKINGS_PENDING_ACTION = createAction(
+    `${PATCH_BOOKINGS}_${ActionType.Pending}`);
+export const PATCH_BOOKINGS_FULFILLED_ACTION = createAction(
+    `${PATCH_BOOKINGS}_${ActionType.Fulfilled}`);
+export const PATCH_BOOKINGS_REJECTED_ACTION = createAction(
+    `${PATCH_BOOKINGS}_${ActionType.Rejected}`);
+
+export const CREATE_BOOKINGS = 'PATCH_BOOKINGS';
+export const CREATE_BOOKINGS_REJECTED = `${CREATE_BOOKINGS}_${ActionType.Rejected}`;
+export const CREATE_BOOKINGS_PENDING_ACTION = createAction(
+    `${CREATE_BOOKINGS}_${ActionType.Pending}`);
+export const CREATE_BOOKINGS_FULFILLED_ACTION = createAction(
+    `${CREATE_BOOKINGS}_${ActionType.Fulfilled}`);
+export const CREATE_BOOKINGS_REJECTED_ACTION = createAction(
+    `${CREATE_BOOKINGS}_${ActionType.Rejected}`);
+
 export const GET_HOME = 'GET_HOME';
 export const GET_HOME_REJECTED = `${GET_HOME}_${ActionType.Rejected}`;
 export const GET_HOME_PENDING_ACTION = createAction(

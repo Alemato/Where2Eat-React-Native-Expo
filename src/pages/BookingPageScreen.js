@@ -1,253 +1,56 @@
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import ItemContainer from '../components/ItemContainer';
 import {Title} from '../components/typo';
+import BookingCard from '../components/BookingCard';
+import {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {getServerBookings} from '../actions/BookingActions';
+import {useDispatch, useSelector} from 'react-redux';
+import {sFutureBookings, sPastBookings} from '../selectors/BookingSelectors';
+import {resetBookings} from '../reducers/BookingsReducer';
 
 export default function BookingPageScreen() {
-  const prenotazioni = [
-    {
-      id: 1,
-      data: '19/01/2023',
-      ora: '20:15',
-      statoPrenotazione: 2,
-      numeroPosti: 1,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-    {
-      id: 2,
-      data: '20/01/2023',
-      ora: '12:00',
-      statoPrenotazione: 3,
-      numeroPosti: 1,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-    {
-      id: 3,
-      data: '22/01/2023',
-      ora: '12:00',
-      statoPrenotazione: 3,
-      numeroPosti: 100,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-    {
-      id: 4,
-      data: '22/01/2023',
-      ora: '12:00',
-      statoPrenotazione: 3,
-      numeroPosti: 10,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-    {
-      id: 13,
-      data: '16/02/2023',
-      ora: '12:45',
-      statoPrenotazione: 0,
-      numeroPosti: 6,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-    {
-      id: 14,
-      data: '23/02/2023',
-      ora: '12:30',
-      statoPrenotazione: 0,
-      numeroPosti: 3,
-      idCliente: 5,
-      ristorante: {
-        id: 2,
-        ragioneSociale: 'Villa Crespi',
-        indirizzo: 'Lago di Como 1',
-        localita: 'Roma',
-        prezzoMedioDichiarato: null,
-        emailAziendale: null,
-        telefonoAziendale: null,
-        statoRistorante: null,
-        capienzaMassima: null,
-        descrizione: null,
-        descrizioneBreve: null,
-        immagini: [
-          {
-            id: 1,
-            alt: 'Villa Crespi',
-            path: 'ristorante/1674145564026_2019-07-Lollo-Caffè.jpg',
-          },
-        ],
-        servizi: [],
-        metodiPagamento: [],
-        tipologiaCucina: [],
-        recensioni: [],
-      },
-    },
-  ];
+  const dispatch = useDispatch();
+  const prenotazioniFuture = useSelector(sFutureBookings);
+  const prenotazioniPassate = useSelector(sPastBookings);
 
-  function divisioneListe() {
-    console.log(prenotazioni.filter(
-        p => p.statoPrenotazione === 0 || p.statoPrenotazione === 1));
-    console.log(prenotazioni.filter(
-        p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
-            3 || p.statoPrenotazione === 4));
-    return {
-      primoGrupo: prenotazioni.filter(
-          p => p.statoPrenotazione === 0 || p.statoPrenotazione === 1),
-      secondoGrupo: prenotazioni.filter(
-          p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
-              3 || p.statoPrenotazione === 4),
+  useFocusEffect(useCallback(function() {
+    if ((prenotazioniFuture == null || prenotazioniFuture.length === 0) &&
+        (prenotazioniPassate == null || prenotazioniPassate.length === 0)) {
+      dispatch(getServerBookings());
+    }
+    return () => {
+      console.log('smonto');
+      dispatch(resetBookings());
     };
-  }
+  }, []));
 
   return (
       <ItemContainer style={styles.container}>
-        <Title title={'Prossime Prenotazioni'}/>
-        {/*<ScrollView style={styles.list}>
-          {divisioneListe().map((item, index) => {
+        <ScrollView style={styles.list}>
+          <Title title={'Prossime Prenotazioni'}/>
+
+          {(prenotazioniFuture == null || prenotazioniFuture.length === 0) &&
+              <Text style={styles.text}>Nessuna prenotazione futura
+                disponibile</Text>}
+          {(prenotazioniFuture != null && prenotazioniFuture.length > 0) &&
+              prenotazioniFuture.map((item, index) => {
                 return <BookingCard
-                    prenotazioneCard={divisioneListe().primoGrupo}
+                    prenotazione={item}
                     key={index}/>;
               })}
-          {divisioneListe().map((item, index) => {
+          <Title title={'Prenotazioni Passate'}/>
+          {(prenotazioniPassate == null || prenotazioniPassate.length === 0) &&
+              <Text style={styles.text}>Nessuna prenotazione passata
+                disponibile</Text>}
+          {(prenotazioniPassate != null && prenotazioniPassate.length > 0) &&
+              prenotazioniPassate.map((item, index) => {
                 return <BookingCard
-                    prenotazioneCard={divisioneListe().secondoGrupo}
+
+                    prenotazione={item}
                     key={index}/>;
               })}
-        </ScrollView>*/}
-
-
-        {/*<FlatList style={styles.list}
-                  data={prenotazioni.filter(
-                      p => p.statoPrenotazione === 0 || p.statoPrenotazione ===
-                          1)}
-                  renderItem={({item}) => <BookingCard
-                      prenotazioneCard={{prenotazione: item}}/>}
-                  keyExtractor={(item) => item.id}
-        />
-
-        <Title title={'Prenotazioni Passate'}/>
-        <FlatList style={styles.list}
-                  data={prenotazioni.filter(
-                      p => p.statoPrenotazione === 2 || p.statoPrenotazione ===
-                          3 || p.statoPrenotazione === 4)}
-                  renderItem={({item}) => <BookingCard
-                      prenotazioneCard={{prenotazione: item}}/>}
-                  keyExtractor={(item) => item.id}
-        />*/}
+        </ScrollView>
       </ItemContainer>
   );
 }
@@ -260,5 +63,9 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+  },
+  text: {
+    fontSize: 16,
+    textAlign: 'center',
   },
 });

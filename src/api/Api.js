@@ -93,6 +93,26 @@ class Api {
           then((response) => serializerResponse(response));
     }
   }
+
+  static modificaPrenotazione({idRistorante, id, stato, token}) {
+    return axios.patch(API_URL + `ristoranti/${idRistorante}/prenotazioni`, {
+          id: id,
+          stato: stato,
+        },
+        {headers: {Authorization: `Bearer ${token}`}}).
+        then((response) => serializerResponse(response));
+  }
+
+  static createPrenotazione({idRistorante, date, time, seat, token}) {
+    return axios.post(API_URL + 'prenotazioni', {
+          id: idRistorante,
+          data: date,
+          ora: time,
+          numeroPosti: seat,
+        },
+        {headers: {Authorization: `Bearer ${token}`}}).
+        then((response) => serializerResponse(response));
+  }
 }
 
 export default Api;

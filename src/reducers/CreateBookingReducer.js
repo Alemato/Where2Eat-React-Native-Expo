@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 };
 
 export const CreateBookingSlice = createSlice({
-  name: 'crea-prenotazione',
+  name: 'createBooking',
   initialState: INITIAL_STATE,
   reducers: {
     resetBookingForm: (state) => {
@@ -36,9 +36,6 @@ export const CreateBookingSlice = createSlice({
           state[part] = value;
           if (state.day && state.month && state.year) {
             state.date = `${state.day}/${state.month}/${state.year}`;
-            /*if (Date(state.date) >= Date.now()) {
-              state.date = '';
-            }*/
           } else {
             state.date = '';
           }
