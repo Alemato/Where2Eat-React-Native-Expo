@@ -9,6 +9,7 @@ import CardTextsContainer from './CardTextsContainer';
 import Badge from './Bedge';
 import MyButton from './MyButton';
 import {useNavigation} from '@react-navigation/native';
+import {IMAGE_API_URL} from '../api/Api';
 
 export default function RestaurantCard({restaurantCard}) {
   const navigation = useNavigation();
@@ -24,22 +25,26 @@ export default function RestaurantCard({restaurantCard}) {
     });
     return (recensioni.length !== 0 ?
         parseFloat((votoMedio / recensioni.length).toFixed(1)).toString() :
-        'nessun');
+        '- (N.D.)');
+  }
+
+  function getImage(value) {
+    return `${IMAGE_API_URL}${value[0].path}`;
   }
 
   return (
       <ItemContainer style={styles.cardContainer}>
         <Card>
           <CardImage
-              source={{uri: 'https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}}
+              source={{uri: getImage(restaurantCard.ristorante.immagini)}}
           />
           <CardTextsContainer>
             <RowContainer style={styles.titleRow}>
               <CardTitle title={restaurantCard.ristorante.ragioneSociale}/>
-              <CardRowText text={'Voto medio:   ' +
-                  votoMedio(restaurantCard.ristorante.recensioni)}>
-              </CardRowText>
             </RowContainer>
+            <CardRowText text={'Voto medio:   ' +
+                votoMedio(restaurantCard.ristorante.recensioni)}>
+            </CardRowText>
             <FlatList horizontal={true}
                       ItemSeparatorComponent={separator}
                       ListEmptyComponent={<View/>}

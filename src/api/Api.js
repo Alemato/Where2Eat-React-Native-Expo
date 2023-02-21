@@ -2,7 +2,7 @@ import axios from 'axios';
 import {LOCALHOST} from './ProxyConstants';
 
 export const API_URL = `http://${LOCALHOST}:8080/api/`;
-export const IMAGE_API_URL = `http://${LOCALHOST}:8080/uploads/`;
+export const IMAGE_API_URL = `http://${LOCALHOST}:8080/api/uploads/`;
 export const TOKEN_JWT_NAME = 'access_token';
 
 export function serializerResponse(response) {
@@ -56,6 +56,12 @@ class Api {
 
   static getHome({token}) {
     return axios.get(API_URL + 'ristoranti',
+        {headers: {Authorization: `Bearer ${token}`}, params: {view: 'home'}}).
+        then((response) => serializerResponse(response));
+  }
+
+  static getRistoranteById({id, token}) {
+    return axios.get(API_URL + `ristoranti/${id}`,
         {headers: {Authorization: `Bearer ${token}`}, params: {view: 'home'}}).
         then((response) => serializerResponse(response));
   }

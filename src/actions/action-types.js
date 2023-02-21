@@ -27,3 +27,21 @@ export const MODIFICA_ACCOUNT_FULFILLED_ACTION = createAction(
     `${MODIFICA_ACCOUNT}_${ActionType.Fulfilled}`);
 export const MODIFICA_ACCOUNT_REJECTED_ACTION = createAction(
     `${MODIFICA_ACCOUNT}_${ActionType.Rejected}`);
+
+export const GET_HOME = 'GET_HOME';
+export const GET_HOME_REJECTED = `${GET_HOME}_${ActionType.Rejected}`;
+export const GET_HOME_PENDING_ACTION = createAction(
+    `${GET_HOME}_${ActionType.Pending}`);
+export const GET_HOME_FULFILLED_ACTION = createAction(
+    `${GET_HOME}_${ActionType.Fulfilled}`);
+export const GET_HOME_REJECTED_ACTION = createAction(
+    `${GET_HOME}_${ActionType.Rejected}`);
+
+export const GET_RISTORANTE = 'GET_RISTORANTE';
+export const GET_RISTORANTE_REJECTED = `${GET_HOME}_${ActionType.Rejected}`;
+export const GET_RISTORANTE_PENDING_ACTION = createAction(
+    `${GET_RISTORANTE}_${ActionType.Pending}`);
+export const GET_RISTORANTE_FULFILLED_ACTION = createAction(
+    `${GET_RISTORANTE}_${ActionType.Fulfilled}`);
+export const GET_RISTORANTE_REJECTED_ACTION = createAction(
+    `${GET_RISTORANTE}_${ActionType.Rejected}`);

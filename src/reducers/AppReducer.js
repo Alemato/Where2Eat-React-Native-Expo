@@ -1,5 +1,11 @@
 import {createSlice, isAnyOf} from '@reduxjs/toolkit';
 import {
+  GET_HOME_FULFILLED_ACTION,
+  GET_HOME_PENDING_ACTION,
+  GET_HOME_REJECTED_ACTION,
+  GET_RISTORANTE_FULFILLED_ACTION,
+  GET_RISTORANTE_PENDING_ACTION,
+  GET_RISTORANTE_REJECTED_ACTION,
   LOGIN_FULFILLED_ACTION,
   LOGIN_PENDING_ACTION,
   LOGIN_REJECTED_ACTION,
@@ -48,14 +54,17 @@ export const AppSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
         isAnyOf(LOGIN_PENDING_ACTION, REGISTRAZIONE_PENDING_ACTION,
-            MODIFICA_ACCOUNT_PENDING_ACTION),
+            MODIFICA_ACCOUNT_PENDING_ACTION, GET_HOME_PENDING_ACTION,
+            GET_RISTORANTE_PENDING_ACTION),
         (state, action) => {
           state.loading = true;
         }).
         addMatcher(isAnyOf(LOGIN_FULFILLED_ACTION, LOGIN_REJECTED_ACTION,
                 REGISTRAZIONE_FULFILLED_ACTION, REGISTRAZIONE_REJECTED_ACTION,
                 MODIFICA_ACCOUNT_FULFILLED_ACTION,
-                MODIFICA_ACCOUNT_REJECTED_ACTION),
+                MODIFICA_ACCOUNT_REJECTED_ACTION, GET_HOME_FULFILLED_ACTION,
+                GET_HOME_REJECTED_ACTION, GET_RISTORANTE_FULFILLED_ACTION,
+                GET_RISTORANTE_REJECTED_ACTION),
             (state, action) => {
               state.loading = false;
             });
