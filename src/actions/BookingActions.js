@@ -6,7 +6,7 @@ import {
   sCreateBookingTime,
 } from '../selectors';
 import {erroreInternoApp, erroreInternoServer} from './actionConstants';
-import {addBookings} from '../reducers/BookingsReducer';
+import {addBookings, toggleBookingState} from '../reducers/BookingsReducer';
 import {Alert} from 'react-native';
 import {resetRegistratiForm} from '../reducers/LoginRegistrazioneReducer';
 import * as navigation from '../navigation/ServiceNavigator';
@@ -55,6 +55,7 @@ export function patchServerBookings(idRistorante, id, stato) {
     }).then(
         function(disp) {
           const response = disp.action.payload;
+          dispatch(toggleBookingState({id: id}));
           console.log('response: ', response);
           Alert.alert('Prenotazione Creata',
               'Ci dispiace tu abbia annullato la prenotazione, fai un\'altra prenotazione',

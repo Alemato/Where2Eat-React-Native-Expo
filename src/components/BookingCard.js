@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import ItemContainer from './ItemContainer';
 import Card from './Card';
 import {CardRowText, CardTitle, ItemHorizontalListSeparator} from './typo';
@@ -11,6 +11,8 @@ import RowContainer from './RowContainer';
 import BookingCancelModal from './BookingCancelModal';
 import {patchServerBookings} from '../actions/BookingActions';
 import {useDispatch} from 'react-redux';
+import * as navigation from '../navigation/ServiceNavigator';
+import {IMAGE_API_URL} from '../api/Api';
 
 export default function BookingCard({prenotazione}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,14 +50,24 @@ export default function BookingCard({prenotazione}) {
     }
   };
 
+  function getImage(value) {
+    return `${IMAGE_API_URL}${value[0].path}`;
+  }
+
   return (
       <ItemContainer style={styles.cardContainer}>
         <Card>
           <CardTextsContainer>
             <RowContainer>
               <View style={{width: '65%'}}>
-                <CardTitle
-                    title={prenotazione.ristorante.ragioneSociale}/>
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate('RestaurantPage',
+                      {id: prenotazione.ristorante.id});
+                }}>
+                  <CardTitle
+                      title={prenotazione.ristorante.ragioneSociale}/>
+                </TouchableOpacity>
+
                 <Badge text={statoPrenotazioneText().nome}
                        badgeStyle={styles.badge}
                        colorStyle={statoPrenotazioneText().color}/>
@@ -66,7 +78,9 @@ export default function BookingCard({prenotazione}) {
               </View>
               <View style={{width: '35%'}}>
                 <CardImage style={styles.image}
-                           source={{uri: 'https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}}
+                           source={{
+                             uri: getImage(prenotazione.ristorante.immagini),
+                           }}
                 />
               </View>
             </RowContainer>
