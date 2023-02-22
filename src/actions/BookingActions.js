@@ -57,7 +57,7 @@ export function patchServerBookings(idRistorante, id, stato) {
           const response = disp.action.payload;
           dispatch(toggleBookingState({id: id}));
           console.log('response: ', response);
-          Alert.alert('Prenotazione Creata',
+          Alert.alert('Prenotazione Annullata',
               'Ci dispiace tu abbia annullato la prenotazione, fai un\'altra prenotazione',
           );
         },
