@@ -6,7 +6,7 @@ import {useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {getServerBookings} from '../actions/BookingActions';
 import {useDispatch, useSelector} from 'react-redux';
-import {sFutureBookings, sPastBookings} from '../selectors/BookingSelectors';
+import {sFutureBookings, sPastBookings} from '../selectors';
 import {resetBookings} from '../reducers/BookingsReducer';
 
 export default function BookingPageScreen() {

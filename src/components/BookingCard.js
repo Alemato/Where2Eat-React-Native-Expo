@@ -40,7 +40,6 @@ export default function BookingCard({prenotazione}) {
       setModalVisible(modalState);
     } else {
       if (annullato) {
-        console.log('prenotazione da annullare');
         setModalVisible(modalState);
         dispatch(patchServerBookings(prenotazione.ristorante.id,
             prenotazione.id, 4));
