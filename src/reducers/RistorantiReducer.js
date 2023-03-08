@@ -44,7 +44,7 @@ export const RistorantiSlice = createSlice({
     resetFormRicerca: (state, action) => {
       state.risultatiRicerca = [];
       state.queryEffettuata = false;
-      Object.assign(state.formRicerca, state.formRicerca);
+      state.formRicerca = INITIAL_STATE.formRicerca;
     },
     resetRisultatiRicerca: (state, action) => {
       state.queryEffettuata = false;
@@ -52,9 +52,7 @@ export const RistorantiSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(logout, (state, action) => {
-      Object.assign(state, INITIAL_STATE);
-    });
+    builder.addCase(logout, () => INITIAL_STATE);
   },
 });
 
