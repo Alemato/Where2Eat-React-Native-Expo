@@ -4,7 +4,7 @@ import {sCreateBookingHour, sCreateBookingMinute} from '../selectors';
 import {StyleSheet, Text, View} from 'react-native';
 import Input from './Input';
 
-export default function TimeInput() {
+export default function BookingTimeInput() {
   const dispatch = useDispatch();
   const hour = useSelector(sCreateBookingHour);
   const minute = useSelector(sCreateBookingMinute);

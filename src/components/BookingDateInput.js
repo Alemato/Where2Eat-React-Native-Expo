@@ -8,7 +8,7 @@ import {
 import {StyleSheet, Text, View} from 'react-native';
 import Input from './Input';
 
-export default function DateInput() {
+export default function BookingDateInput() {
   const dispatch = useDispatch();
   const day = useSelector(sCreateBookingDay);
   const month = useSelector(sCreateBookingMonth);

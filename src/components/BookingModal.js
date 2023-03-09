@@ -3,8 +3,8 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import MyButton from './MyButton';
 import {CardTitle} from './typo';
 import ItemContainer from './ItemContainer';
-import DateInput from './DateInput';
-import TimeInput from './TimeInput';
+import BookingDateInput from './BookingDateInput';
+import BookingTimeInput from './BookingTimeInput';
 import RowContainer from './RowContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -15,7 +15,7 @@ import {
   sCreateBookingTime,
   sCreateBookingYear,
 } from '../selectors';
-import SeatInput from './SeatInput';
+import BookingSeatInput from './BookingSeatInput';
 import {useFocusEffect} from '@react-navigation/native';
 import {resetBookingForm} from '../reducers/CreateBookingReducer';
 
@@ -57,19 +57,19 @@ export default function BookingModal({setModalVisible, modalVisible}) {
               <ItemContainer style={styles.rowData}>
                 <RowContainer>
                   <Text style={styles.text}>Data : </Text>
-                  <DateInput/>
+                  <BookingDateInput/>
                 </RowContainer>
               </ItemContainer>
               <ItemContainer style={styles.rowOra}>
                 <RowContainer>
                   <Text style={styles.text}>Ora : </Text>
-                  <TimeInput/>
+                  <BookingTimeInput/>
                 </RowContainer>
               </ItemContainer>
               <ItemContainer style={styles.rowPosti}>
                 <RowContainer>
                   <Text style={styles.text}>Posti : </Text>
-                  <SeatInput/>
+                  <BookingSeatInput/>
                 </RowContainer>
               </ItemContainer>
 

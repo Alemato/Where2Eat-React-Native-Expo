@@ -5,7 +5,7 @@ import {StyleSheet, View} from 'react-native';
 import Input from './Input';
 import React from 'react';
 
-export default function SeatInput() {
+export default function BookingSeatInput() {
   const dispatch = useDispatch();
   const seat = useSelector(sCreateBookingSeat);
 
