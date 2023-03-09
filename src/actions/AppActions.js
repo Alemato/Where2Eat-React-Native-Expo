@@ -59,32 +59,3 @@ export function appSignIn() {
     });
   };
 }
-
-/*Api.loggedIn({email, password}).then(
-        function(response) {
-          console.log("response");
-          console.log(response.data);
-          console.log(response.status);
-          console.log(response.statusText);
-          console.log(response.headers);
-          console.log(response.config);
-        },
-    ).catch(function(error) {
-      console.log("error");
-      if (error.response) {
-        // La richiesta è stata effettuata e il server ha risposto con un codice di stato
-        // che non rientra nell'intervallo di 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // La richiesta è stata effettuata ma non è stata ricevuta alcuna risposta
-        // `error.request` è un'istanza di XMLHttpRequest nel browser e un'istanza di
-        // http.ClientRequest in node.js
-        console.log(error.request);
-      } else {
-        // Si è verificato qualcosa durante l'impostazione della richiesta che ha attivato un errore
-        console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });*/
